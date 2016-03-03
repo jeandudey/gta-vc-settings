@@ -1,0 +1,7 @@
+[package]
+name = "gta-vc-settings"
+version = "0.1.0"
+authors = ["Jean Piere Dudey <jeandudey@hotmail.com>"]
+
+[dependencies]
+byteorder = "0.4"
