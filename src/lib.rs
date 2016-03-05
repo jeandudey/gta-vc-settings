@@ -1,3 +1,33 @@
+#![deny(trivial_casts, trivial_numeric_casts,
+        unsafe_code, unstable_features,
+        unused_import_braces, unused_qualifications)]
+
+/// This crate provides a native and easy way to read and write
+/// *Grand Theft Auto: Vice City* settings file (gta_vc.set).
+///
+/// # Usage
+/// This crate is on crates.io and can be used by adding gta_vc_settings to
+/// your dependencies in your project's Cargo.toml.
+///
+/// ```
+/// [dependencies]
+/// gta_vc_settings = "0.1"
+/// ```
+///
+/// and this to your crate root:
+///
+/// ```
+/// extern crate gta_vc_settings;
+/// ```
+///
+/// # Example: read a settings file.
+/// ```
+/// use gta_vc_settings::GtaVcSettings;
+///
+/// let settings = GtaVcSettings::new();
+/// settings.read("./tests/gta_vc.set");
+/// ```
+
 /**
  *    Copyright (C) 2016 Jean Piere Dudey
  *
@@ -24,14 +54,20 @@ use std::path::Path;
 use std::str;
 use std::io;
 
+/// Enum representing result returned by `GtaVcSettings` functions.
 #[derive(Debug)]
 pub enum SettingsResult {
+    /// Returned when the operation was completed succesfully.
     Ok,
+
+    /// Returned when an I/O operation was errored.
     IoError(io::Error),
-    InvalidFile,
+
+    /// Returned if the file is not valid yet.
     NotValidYet
 }
 
+/// Struct representing a settings file.
 pub struct GtaVcSettings {
     /// Defaults to 3
     pub total_sections: u32,
