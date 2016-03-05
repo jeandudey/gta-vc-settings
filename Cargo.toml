@@ -2,6 +2,12 @@
 name = "gta-vc-settings"
 version = "0.1.0"
 authors = ["Jean Piere Dudey <jeandudey@hotmail.com>"]
+repository = "https://github.com/jeandudey/gta-vc-settings-rs.git"
+homepage = "https://github.com/jeandudey/gta-vc-settings-rs.git"
+license = "GPL-3.0"
+readme = "README.md"
+documentation = "http://jeandudey.github.io/gta-vc-settings-rs/"
+description = "Grand Theft Auto: Vice City settings file reader and writer in rust."
 
 [dependencies]
 byteorder = "0.4"
