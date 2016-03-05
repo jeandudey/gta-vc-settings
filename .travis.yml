@@ -1,7 +1,6 @@
 sudo: false
 language: rust
 rust:
-- nightly
 - beta
 - stable
 matrix:
@@ -31,5 +30,4 @@ notifications:
     on_success: never
 env:
   global:
-  - secure:
   - secure: D8LUsAdoP/FK0+GNWvDWO3i1YZYu5wywbRCROXfOu/gZdjDW3KQR4XHFsR7BslL+H0svBf5eaO5r9UYU3vh/dgT6ff+2HA2HDZkw34z+FQ7PFVsZPD30tdT3hU7X84wtwn+OLo+DIUVenFbYa9ZysNaIWOJ6VwonPycHeXG2KQMHZ3kF485AAMlsWUOwEsH2ttZFN3EykDGASi9x5obL+NAc9Go2jrrTgtHbxDUCaHJeo4irl0yILojrxeVwJvs9RFHiu0oLLxL+vo4A8A+2+QaaAkN9gvKFX41QqtfMlZryYdJ9rYXl9UoaLT439+4JcBtcGluIykQTtcrP0catYQauwMgcHvs7HyLWMQBbFtbXE+AHn7Kqk5q3tSVO70K70GtVW2zgbDKlvsnYPGzwBnI0coOeDy4Sa1pAcqbYyGc1KgM1R+CJhm0BFS+OpN6IThEf5e8FwRH8auDTVb3vTT8mT+L2GgwoFlQl2Ix0jLLlkaWKMTcAoqIB0XUOdzgody7Eb/gFKWW4cZo3URMOLo7E/FCfHrDe2vp5sgUfgDovWvopznj5uEKUdEzL9Ep0w0019rhatjgk9GcHUzQ2CLniwLLnZWapFBPDayuf0aPW7gL/7YWzdkFtdKHI7l4bB0zZXJxg0hLU3Ece8NNkTL0oI12woExSwc3XywoVIKU=
