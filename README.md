@@ -3,6 +3,14 @@
       <img src="https://travis-ci.org/jeandudey/gta-vc-settings-rs.svg?branch=master" alt="Build Status">
   </a>
 
+  <a href="https://crates.io/crates/gta-vc-settings">
+      <img src="https://img.shields.io/crates/v/gta-vc-settings.svg" alt="Crate version">
+  </a>
+
+  <a href="https://crates.io/crates/gta-vc-settings">
+      <img src="https://img.shields.io/crates/l/gta-vc-settings.svg" alt="Crate license">
+  </a>
+
   <br/>
 
   <strong>
