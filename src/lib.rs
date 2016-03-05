@@ -1,29 +1,3 @@
-/// This crate provides a native and easy way to read and write
-/// *Grand Theft Auto: Vice City* settings file (gta_vc.set).
-///
-/// # Usage
-/// This crate is on crates.io and can be used by adding gta_vc_settings to
-/// your dependencies in your project's Cargo.toml.
-///
-/// ```toml
-/// [dependencies]
-/// gta_vc_settings = "0.1"
-/// ```
-///
-/// and this to your crate root:
-///
-/// ```
-/// extern crate gta_vc_settings;
-/// ```
-///
-/// # Example: read a settings file.
-/// ```
-/// use gta_vc_settings::GtaVcSettings;
-///
-/// let mut settings = GtaVcSettings::new();
-/// settings.read("./tests/gta_vc.set");
-/// ```
-
 /**
  *    Copyright (C) 2016 Jean Piere Dudey
  *
@@ -40,6 +14,32 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+//! This crate provides a native and easy way to read and write
+//! *Grand Theft Auto: Vice City* settings file (gta_vc.set).
+//!
+//! # Usage
+//! This crate is on crates.io and can be used by adding gta_vc_settings to
+//! your dependencies in your project's Cargo.toml.
+//!
+//! ```toml
+//! [dependencies]
+//! gta_vc_settings = "0.1"
+//! ```
+//!
+//! and this to your crate root:
+//!
+//! ```
+//! extern crate gta_vc_settings;
+//! ```
+//!
+//! # Example: read a settings file.
+//! ```
+//! use gta_vc_settings::GtaVcSettings;
+//!
+//! let mut settings = GtaVcSettings::new();
+//! settings.read("./tests/gta_vc.set");
+//! ```
 
 extern crate byteorder;
 
