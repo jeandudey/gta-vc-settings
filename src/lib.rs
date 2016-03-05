@@ -1,7 +1,3 @@
-#![deny(trivial_casts, trivial_numeric_casts,
-        unsafe_code, unstable_features,
-        unused_import_braces, unused_qualifications)]
-
 /// This crate provides a native and easy way to read and write
 /// *Grand Theft Auto: Vice City* settings file (gta_vc.set).
 ///
