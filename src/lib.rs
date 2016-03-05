@@ -9,7 +9,7 @@
 /// This crate is on crates.io and can be used by adding gta_vc_settings to
 /// your dependencies in your project's Cargo.toml.
 ///
-/// ```
+/// ```toml
 /// [dependencies]
 /// gta_vc_settings = "0.1"
 /// ```
@@ -24,7 +24,7 @@
 /// ```
 /// use gta_vc_settings::GtaVcSettings;
 ///
-/// let settings = GtaVcSettings::new();
+/// let mut settings = GtaVcSettings::new();
 /// settings.read("./tests/gta_vc.set");
 /// ```
 
