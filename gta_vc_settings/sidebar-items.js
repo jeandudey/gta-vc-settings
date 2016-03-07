@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["SettingsResult","Enum representing result returned by `GtaVcSettings` functions."]],"struct":[["GtaVcSettings","Struct representing a settings file."]]});
