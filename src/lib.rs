@@ -7,7 +7,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! gta_vc_settings = "0.1"
+//! gta-vc-settings = "0.1"
 //! ```
 //!
 //! and this to your crate root:
@@ -58,6 +58,9 @@ pub enum SettingsResult {
 
     /// Returned when an I/O operation was errored.
     IoError(io::Error),
+
+    /// Returned when an I/O operation was errored.
+    UnexpectedEOF,
 
     /// Returned if the file is not valid yet.
     NotValidYet
@@ -166,6 +169,62 @@ pub struct GtaVcSettings {
 
 const NOT_VALID_STR: &'static str = "THIS FILE IS NOT VALID YET";
 
+macro_rules! read_u8 {
+    ($rdr:ident) => {
+        match $rdr.read_u8() {
+            Ok(val) => val,
+            Err(err) => {
+                match err {
+                    byteorder::Error::UnexpectedEOF => return SettingsResult::UnexpectedEOF,
+                    byteorder::Error::Io(ioerr) => return SettingsResult::IoError(ioerr),
+                }
+            }
+        }
+    }
+}
+
+macro_rules! read_u32_le {
+    ($rdr:ident) => {
+        match $rdr.read_u32::<LittleEndian>() {
+            Ok(val) => val,
+            Err(err) => {
+                match err {
+                    byteorder::Error::UnexpectedEOF => return SettingsResult::UnexpectedEOF,
+                    byteorder::Error::Io(ioerr) => return SettingsResult::IoError(ioerr),
+                }
+            }
+        }
+    }
+}
+
+macro_rules! read_f32_le {
+    ($rdr:ident) => {
+        match $rdr.read_f32::<LittleEndian>() {
+            Ok(val) => val,
+            Err(err) => {
+                match err {
+                    byteorder::Error::UnexpectedEOF => return SettingsResult::UnexpectedEOF,
+                    byteorder::Error::Io(ioerr) => return SettingsResult::IoError(ioerr),
+                }
+            }
+        }
+    }
+}
+
+macro_rules! read_u16_le {
+    ($rdr:ident) => {
+        match $rdr.read_u16::<LittleEndian>() {
+            Ok(val) => val,
+            Err(err) => {
+                match err {
+                    byteorder::Error::UnexpectedEOF => return SettingsResult::UnexpectedEOF,
+                    byteorder::Error::Io(ioerr) => return SettingsResult::IoError(ioerr),
+                }
+            }
+        }
+    }
+}
+
 impl GtaVcSettings {
     /// Creates a GtaVcSettings with default data.
     ///
@@ -239,37 +298,37 @@ impl GtaVcSettings {
         };
 
         file.seek(SeekFrom::Start(0)).unwrap();
-        self.total_sections = file.read_u32::<LittleEndian>().unwrap();
+        self.total_sections = read_u32_le!(file);
 
         if self.total_sections >= 3 {
             file.read(&mut self.controls).unwrap();
             file.read(&mut self.strings).unwrap();
 
-            self.unknown = file.read_u8().unwrap();
-            self.mouse_sensitivity = file.read_u32::<LittleEndian>().unwrap();
-            self.mouse_invert_y = file.read_u8().unwrap();
-            self.steer_with_mouse = file.read_u8().unwrap();
-            self.sfx_volume = file.read_u8().unwrap();
-            self.music_volume = file.read_u8().unwrap();
-            self.mp3_volume_boost = file.read_u8().unwrap();
-            self.current_radio = file.read_u8().unwrap();
-            self.speakers_configuration = file.read_u8().unwrap();
-            self.audio_hardware = file.read_u8().unwrap();
-            self.dynamic_acoustic_mode = file.read_u8().unwrap();
-            self.brightness = file.read_u16::<LittleEndian>().unwrap();
-            self.draw_distance = file.read_f32::<LittleEndian>().unwrap();
-            self.subtitles = file.read_u8().unwrap();
-            self.widescreen = file.read_u8().unwrap();
-            self.frame_limiter = file.read_u8().unwrap();
-            self.video_mode = file.read_u8().unwrap();
+            self.unknown = read_u8!(file);
+            self.mouse_sensitivity = read_u32_le!(file);
+            self.mouse_invert_y = read_u8!(file);
+            self.steer_with_mouse = read_u8!(file);
+            self.sfx_volume = read_u8!(file);
+            self.music_volume = read_u8!(file);
+            self.mp3_volume_boost = read_u8!(file);
+            self.current_radio = read_u8!(file);
+            self.speakers_configuration = read_u8!(file);
+            self.audio_hardware = read_u8!(file);
+            self.dynamic_acoustic_mode = read_u8!(file);
+            self.brightness = read_u16_le!(file);
+            self.draw_distance = read_f32_le!(file);
+            self.subtitles = read_u8!(file);
+            self.widescreen = read_u8!(file);
+            self.frame_limiter = read_u8!(file);
+            self.video_mode = read_u8!(file);
 
             file.read(&mut self.skin_path).unwrap();
 
-            self.standard_controls = file.read_u8().unwrap();
-            self.current_language = file.read_u8().unwrap();
-            self.hud_mode = file.read_u8().unwrap();
-            self.radar_mode = file.read_u8().unwrap();
-            self.map_legend = file.read_u8().unwrap();
+            self.standard_controls = read_u8!(file);
+            self.current_language = read_u8!(file);
+            self.hud_mode = read_u8!(file);
+            self.radar_mode = read_u8!(file);
+            self.map_legend = read_u8!(file);
         }
 
         SettingsResult::Ok
